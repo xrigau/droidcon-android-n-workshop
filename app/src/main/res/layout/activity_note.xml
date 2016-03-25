@@ -27,5 +27,5 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         tools:listitem="@layout/note_item_list_item"
-        android:numColumns="4"/>
+        android:numColumns="auto_fit"/>
 </android.support.design.widget.CoordinatorLayout>

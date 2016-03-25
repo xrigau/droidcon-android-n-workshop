@@ -45,7 +45,7 @@ public class NoteItemsAdapter extends BaseAdapter {
         //---------------------
         CheckBox noteItemCheckBox = (CheckBox) gridView
                 .findViewById(R.id.noteItemCheck);
-        noteItemCheckBox.setChecked(position % 2 == 0);
+        noteItemCheckBox.setChecked(position % 3 == 0);
 
         return gridView;
     }
