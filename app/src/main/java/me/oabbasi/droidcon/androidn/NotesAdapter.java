@@ -4,10 +4,15 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.RemoteInput;
+import android.content.ClipData;
+import android.content.ClipDescription;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +20,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by oubai on 3/23/16.
@@ -22,7 +28,7 @@ import android.widget.TextView;
 public class NotesAdapter extends BaseAdapter {
     private Context context;
     private final String[] notes;
-    private static final String KEY_TEXT_REPLY = "key_text_reply";
+    public static final String KEY_TEXT_REPLY = "key_text_reply";
 
     public NotesAdapter(Context context, String[] notes) {
         this.context = context;
