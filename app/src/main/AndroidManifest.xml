@@ -11,7 +11,7 @@
         <!--http://developer.android.com/guide/topics/manifest/activity-element.html#aff-->
         <activity
             android:name=".MainActivity"
-            android:taskAffinity="">
+            android:taskAffinity="com.two">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:name=".NoteActivity"
-            android:taskAffinity="" />
+            android:taskAffinity="com.one" />
 
         <!--<service-->
             <!--android:name=".MyQSTileService"-->
