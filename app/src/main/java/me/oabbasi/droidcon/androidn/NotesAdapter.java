@@ -7,6 +7,7 @@ import android.app.RemoteInput;
 import android.content.Context;
 import android.content.Intent;
 import android.service.notification.StatusBarNotification;
+import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,7 +109,7 @@ public class NotesAdapter extends BaseAdapter {
                     // Issue the notification
                     notificationManager.notify(position, notification);
                 }
-//                updateNotificationSummary();
+                updateNotificationSummary();
             }
         });
 
@@ -131,39 +132,39 @@ public class NotesAdapter extends BaseAdapter {
     /**
      * Adds/updates/removes the notification summary as necessary.
      */
-//    protected void updateNotificationSummary() {
-//        NotificationManager notificationManager = (NotificationManager)
-//                context.getSystemService(Context.NOTIFICATION_SERVICE);
-//        final StatusBarNotification[] activeNotifications = notificationManager
-//                .getActiveNotifications();
-//
-//        int numberOfNotifications = activeNotifications.length;
-//        // Since the notifications might include a summary notification remove it from the count if
-//        // it is present.
-//        for (StatusBarNotification notification : activeNotifications) {
-//            if (notification.getId() == 99) {
-//                numberOfNotifications--;
-//                break;
-//            }
-//        }
-//
-//        if (numberOfNotifications > 1) {
-//            // Add/update the notification summary.
-//            String notificationContent = "Android N Bookmarked Notes: " + numberOfNotifications;
-//            final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-//                    .setSmallIcon(R.drawable.ic_bookmark_black_24dp)
-//                    .setStyle(new NotificationCompat.BigTextStyle()
-//                            .setSummaryText(notificationContent))
-//                    .setGroup("notes")
-//                    .setOngoing(true)
-//                    .setGroupSummary(true);
-//            final Notification notification = builder.build();
-//            notificationManager.notify(99, notification);
-//        } else {
-//            // Remove the notification summary.
-//            notificationManager.cancel(99);
-//        }
-//    }
+    protected void updateNotificationSummary() {
+        NotificationManager notificationManager = (NotificationManager)
+                context.getSystemService(Context.NOTIFICATION_SERVICE);
+        final StatusBarNotification[] activeNotifications = notificationManager
+                .getActiveNotifications();
+
+        int numberOfNotifications = activeNotifications.length;
+        // Since the notifications might include a summary notification remove it from the count if
+        // it is present.
+        for (StatusBarNotification notification : activeNotifications) {
+            if (notification.getId() == 99) {
+                numberOfNotifications--;
+                break;
+            }
+        }
+
+        if (numberOfNotifications > 1) {
+            // Add/update the notification summary.
+            String notificationContent = "Android N Bookmarked Notes: " + numberOfNotifications;
+            final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+                    .setSmallIcon(R.drawable.ic_bookmark_black_24dp)
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .setSummaryText(notificationContent))
+                    .setGroup("notes")
+                    .setOngoing(true)
+                    .setGroupSummary(true);
+            final Notification notification = builder.build();
+            notificationManager.notify(99, notification);
+        } else {
+            // Remove the notification summary.
+            notificationManager.cancel(99);
+        }
+    }
 
     @Override
     public int getCount() {
