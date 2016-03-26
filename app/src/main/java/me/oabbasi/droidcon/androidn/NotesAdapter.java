@@ -2,6 +2,8 @@ package me.oabbasi.droidcon.androidn;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.RemoteInput;
 import android.content.Context;
 import android.content.Intent;
 import android.service.notification.StatusBarNotification;
@@ -81,26 +83,26 @@ public class NotesAdapter extends BaseAdapter {
                 }
                 if (!noteNotificationExists) {
                     String replyLabel = "Enter item text";
-//                    RemoteInput remoteInput = new RemoteInput.Builder(KEY_TEXT_REPLY)
-//                            .setLabel(replyLabel)
-//                            .build();
-//                    Intent noteReplyIntent = new Intent(context, NoteNotificationService.class);
-//                    noteReplyIntent.putExtra("notificationId", position);
-//                    PendingIntent replyPendingIntent = PendingIntent.getService(context, 0, noteReplyIntent, 0);
-//                    Notification.Action action =
-//                            new Notification.Action.Builder(R.drawable.ic_add_white_24dp,
-//                                    "Add item", replyPendingIntent)
-//                                    .addRemoteInput(remoteInput)
-//                                    .build();
+                    RemoteInput remoteInput = new RemoteInput.Builder(KEY_TEXT_REPLY)
+                            .setLabel(replyLabel)
+                            .build();
+                    Intent noteReplyIntent = new Intent(context, NoteNotificationService.class);
+                    noteReplyIntent.putExtra("notificationId", position);
+                    PendingIntent replyPendingIntent = PendingIntent.getService(context, 0, noteReplyIntent, 0);
+                    Notification.Action action =
+                            new Notification.Action.Builder(R.drawable.ic_add_white_24dp,
+                                    "Add item", replyPendingIntent)
+                                    .addRemoteInput(remoteInput)
+                                    .build();
                     // Build the notification and add the action
                     Notification notification =
                             new Notification.Builder(context)
                                     .setSmallIcon(R.drawable.ic_bookmark_border_black_24dp)
                                     .setContentTitle("Android N Notes")
                                     .setContentText("Note: " + notes[position])
-//                                    .addAction(action)
+                                    .addAction(action)
                                     .setOngoing(true)
-//                                    .setGroup("notes")
+                                    .setGroup("notes")
                                     .build();
 
                     // Issue the notification
