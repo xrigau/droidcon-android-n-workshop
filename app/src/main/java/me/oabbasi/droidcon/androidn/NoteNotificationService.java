@@ -1,7 +1,9 @@
 package me.oabbasi.droidcon.androidn;
 
+import android.app.NotificationManager;
 import android.app.RemoteInput;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -24,9 +26,11 @@ public class NoteNotificationService extends Service {
         Log.d("NoteNotification","onStartCommand");
         Bundle remoteInput = RemoteInput.getResultsFromIntent(intent);
         if (remoteInput != null) {
-            Log.d("NoteNotification","remoteInput != null");
             Toast.makeText(getApplicationContext(),remoteInput.getCharSequence(NotesAdapter.KEY_TEXT_REPLY),Toast.LENGTH_SHORT).show();
             Log.d("NoteNotification",remoteInput.getCharSequence(NotesAdapter.KEY_TEXT_REPLY).toString());
+            NotificationManager notificationManager = (NotificationManager)
+                    getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.cancel(intent.getIntExtra("notificationId",0));
         }
         return super.onStartCommand(intent, flags, startId);
     }

@@ -63,6 +63,7 @@ public class NotesAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent noteIntent = new Intent(context, NoteActivity.class);
+                noteIntent.putExtra("noteTitle", notes[position]);
                 context.startActivity(noteIntent);
             }
         });
@@ -92,8 +93,9 @@ public class NotesAdapter extends BaseAdapter {
                     RemoteInput remoteInput = new RemoteInput.Builder(KEY_TEXT_REPLY)
                             .setLabel(replyLabel)
                             .build();
-
-                    PendingIntent replyPendingIntent = PendingIntent.getService(context, 0, new Intent(context, NoteNotificationService.class), 0);
+                    Intent noteReplyIntent = new Intent(context, NoteNotificationService.class);
+                    noteReplyIntent.putExtra("notificationId", position);
+                    PendingIntent replyPendingIntent = PendingIntent.getService(context, 0, noteReplyIntent, 0);
                     Notification.Action action =
                             new Notification.Action.Builder(R.drawable.ic_add_white_24dp,
                                     "Add item", replyPendingIntent)
@@ -123,6 +125,7 @@ public class NotesAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent noteIntent = new Intent(context, NoteActivity.class);
+                noteIntent.putExtra("noteTitle", notes[position]);
                 noteIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(noteIntent);
             }

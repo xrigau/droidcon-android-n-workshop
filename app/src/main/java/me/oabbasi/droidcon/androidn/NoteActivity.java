@@ -14,12 +14,25 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.Toast;
 
-public class NoteActivity extends AppCompatActivity implements View.OnDragListener{
+public class NoteActivity extends AppCompatActivity implements View.OnDragListener {
 
     GridView gridView;
 
-    static final String[] notes = new String[] {
-            "Android", "iOS","Windows", "Blackberry","Android", "iOS","Windows", "Blackberry","Android", "iOS","Windows", "Blackberry","Android", "iOS","Windows", "Blackberry" };
+    static final String[] notes = new String[]{
+            "Apples",
+            "Bananas",
+            "Berries",
+            "Grapes",
+            "Lemons",
+            "Lime",
+            "Melons",
+            "Nectarines",
+            "Oranges",
+            "Peaches",
+            "Pears",
+            "Plums",
+            "Strawberries",
+            "Watermelon"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +40,10 @@ public class NoteActivity extends AppCompatActivity implements View.OnDragListen
         setContentView(R.layout.activity_note);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolbar.setBackgroundColor(Color.LTGRAY);
         setSupportActionBar(myToolbar);
+        setTitle(getIntent().getStringExtra("noteTitle"));
+        getWindow().setStatusBarColor(Color.DKGRAY);
 
         gridView = (GridView) findViewById(R.id.notesGridView);
         gridView.setAdapter(new NoteItemsAdapter(this, notes));
@@ -65,7 +81,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnDragListen
         final int action = event.getAction();
 
         // Handles each of the expected events
-        switch(action) {
+        switch (action) {
 
             case DragEvent.ACTION_DRAG_STARTED:
 
@@ -157,7 +173,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnDragListen
 
             // An unknown action type was received.
             default:
-                Log.e("DragDrop Example","Unknown action type received by OnDragListener.");
+                Log.e("DragDrop Example", "Unknown action type received by OnDragListener.");
                 break;
         }
 
