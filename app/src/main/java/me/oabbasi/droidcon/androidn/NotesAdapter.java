@@ -2,17 +2,9 @@ package me.oabbasi.droidcon.androidn;
 
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.RemoteInput;
-import android.content.ClipData;
-import android.content.ClipDescription;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.service.notification.StatusBarNotification;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by oubai on 3/23/16.
@@ -127,7 +118,7 @@ public class NotesAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Intent noteIntent = new Intent(context, NoteActivity.class);
                 noteIntent.putExtra("noteTitle", notes[position]);
-//                noteIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                noteIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(noteIntent);
             }
         });
