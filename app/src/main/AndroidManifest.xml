@@ -10,8 +10,8 @@
         android:theme="@style/AppTheme">
         <!--http://developer.android.com/guide/topics/manifest/activity-element.html#aff-->
         <activity
-            android:name=".MainActivity"
-            android:taskAffinity="">
+            android:name=".MainActivity">
+            <!--android:taskAffinity="">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,18 +19,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NoteActivity"
-            android:taskAffinity="" />
+            android:name=".NoteActivity"/>
+            <!--android:taskAffinity="" />-->
 
-        <service
-            android:name=".MyQSTileService"
-            android:icon="@drawable/ic_bookmark_border_black_24dp"
-            android:label="Quick Notes"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-        </service>
+        <!--<service-->
+            <!--android:name=".MyQSTileService"-->
+            <!--android:icon="@drawable/ic_bookmark_border_black_24dp"-->
+            <!--android:label="Quick Notes"-->
+            <!--android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.service.quicksettings.action.QS_TILE" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
         <service
             android:name=".NoteNotificationService"
             android:enabled="true"

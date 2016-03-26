@@ -90,31 +90,32 @@ public class NotesAdapter extends BaseAdapter {
                 }
                 if (!noteNotificationExists) {
                     String replyLabel = "Enter item text";
-                    RemoteInput remoteInput = new RemoteInput.Builder(KEY_TEXT_REPLY)
-                            .setLabel(replyLabel)
-                            .build();
-                    Intent noteReplyIntent = new Intent(context, NoteNotificationService.class);
-                    noteReplyIntent.putExtra("notificationId", position);
-                    PendingIntent replyPendingIntent = PendingIntent.getService(context, 0, noteReplyIntent, 0);
-                    Notification.Action action =
-                            new Notification.Action.Builder(R.drawable.ic_add_white_24dp,
-                                    "Add item", replyPendingIntent)
-                                    .addRemoteInput(remoteInput)
-                                    .build();
+//                    RemoteInput remoteInput = new RemoteInput.Builder(KEY_TEXT_REPLY)
+//                            .setLabel(replyLabel)
+//                            .build();
+//                    Intent noteReplyIntent = new Intent(context, NoteNotificationService.class);
+//                    noteReplyIntent.putExtra("notificationId", position);
+//                    PendingIntent replyPendingIntent = PendingIntent.getService(context, 0, noteReplyIntent, 0);
+//                    Notification.Action action =
+//                            new Notification.Action.Builder(R.drawable.ic_add_white_24dp,
+//                                    "Add item", replyPendingIntent)
+//                                    .addRemoteInput(remoteInput)
+//                                    .build();
                     // Build the notification and add the action
                     Notification notification =
                             new Notification.Builder(context)
                                     .setSmallIcon(R.drawable.ic_bookmark_border_black_24dp)
                                     .setContentTitle("Android N Notes")
                                     .setContentText("Note: " + notes[position])
-                                    .addAction(action)
+//                                    .addAction(action)
                                     .setOngoing(true)
-                                    .setGroup("notes").build();
+//                                    .setGroup("notes")
+                                    .build();
 
                     // Issue the notification
                     notificationManager.notify(position, notification);
                 }
-                updateNotificationSummary();
+//                updateNotificationSummary();
             }
         });
 
@@ -126,7 +127,7 @@ public class NotesAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Intent noteIntent = new Intent(context, NoteActivity.class);
                 noteIntent.putExtra("noteTitle", notes[position]);
-                noteIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                noteIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(noteIntent);
             }
         });
@@ -137,39 +138,39 @@ public class NotesAdapter extends BaseAdapter {
     /**
      * Adds/updates/removes the notification summary as necessary.
      */
-    protected void updateNotificationSummary() {
-        NotificationManager notificationManager = (NotificationManager)
-                context.getSystemService(Context.NOTIFICATION_SERVICE);
-        final StatusBarNotification[] activeNotifications = notificationManager
-                .getActiveNotifications();
-
-        int numberOfNotifications = activeNotifications.length;
-        // Since the notifications might include a summary notification remove it from the count if
-        // it is present.
-        for (StatusBarNotification notification : activeNotifications) {
-            if (notification.getId() == 99) {
-                numberOfNotifications--;
-                break;
-            }
-        }
-
-        if (numberOfNotifications > 1) {
-            // Add/update the notification summary.
-            String notificationContent = "Android N Bookmarked Notes: " + numberOfNotifications;
-            final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                    .setSmallIcon(R.drawable.ic_bookmark_black_24dp)
-                    .setStyle(new NotificationCompat.BigTextStyle()
-                            .setSummaryText(notificationContent))
-                    .setGroup("notes")
-                    .setOngoing(true)
-                    .setGroupSummary(true);
-            final Notification notification = builder.build();
-            notificationManager.notify(99, notification);
-        } else {
-            // Remove the notification summary.
-            notificationManager.cancel(99);
-        }
-    }
+//    protected void updateNotificationSummary() {
+//        NotificationManager notificationManager = (NotificationManager)
+//                context.getSystemService(Context.NOTIFICATION_SERVICE);
+//        final StatusBarNotification[] activeNotifications = notificationManager
+//                .getActiveNotifications();
+//
+//        int numberOfNotifications = activeNotifications.length;
+//        // Since the notifications might include a summary notification remove it from the count if
+//        // it is present.
+//        for (StatusBarNotification notification : activeNotifications) {
+//            if (notification.getId() == 99) {
+//                numberOfNotifications--;
+//                break;
+//            }
+//        }
+//
+//        if (numberOfNotifications > 1) {
+//            // Add/update the notification summary.
+//            String notificationContent = "Android N Bookmarked Notes: " + numberOfNotifications;
+//            final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+//                    .setSmallIcon(R.drawable.ic_bookmark_black_24dp)
+//                    .setStyle(new NotificationCompat.BigTextStyle()
+//                            .setSummaryText(notificationContent))
+//                    .setGroup("notes")
+//                    .setOngoing(true)
+//                    .setGroupSummary(true);
+//            final Notification notification = builder.build();
+//            notificationManager.notify(99, notification);
+//        } else {
+//            // Remove the notification summary.
+//            notificationManager.cancel(99);
+//        }
+//    }
 
     @Override
     public int getCount() {
